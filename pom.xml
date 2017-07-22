@@ -37,6 +37,12 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
+  <distributionManagement>
+    <repository>
+      <id>yumc-xjboss</id>
+      <url >http://repo.yumc.pw/content/repositories/xjboss/</url >
+    </repository >
+  </distributionManagement>
   <developers>
     <developer>
       <id>Prototik</id>
