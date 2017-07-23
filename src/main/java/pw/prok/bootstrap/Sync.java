@@ -155,7 +155,7 @@ public class Sync{
                 final String artifact=s.substring((c=s.lastIndexOf(47))+1).trim();
                 s=s.substring(0,c);
                 final String group=s.replace("../","").replace('/','.');
-                artifacts.add(new LibraryArtifact(group,artifact,version,legacy?"libraries/<group>/<artifact>/<version>":null,legacy?filename:null));
+                artifacts.add(new LibraryArtifact(group,artifact,version,legacy?"<group>/<artifact>/<version>":null,legacy?filename:null));
             }
         }
     }
