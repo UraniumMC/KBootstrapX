@@ -29,9 +29,16 @@ public class Sync{
     private static boolean mGradleRepoDirResloved=false;
 
     public static File getUserDir(){
-        String tUserDir=System.getenv("USER_HOME");
-        if(tUserDir==null) tUserDir=System.getenv("USERPROFILE");
-        return tUserDir==null?null:new File(tUserDir);
+        for(String sEnv : new String[]{"HOME","USERPROFILE","USER_HOME"}){
+            String tUserDirStr=System.getenv(sEnv);
+            if(tUserDirStr!=null){
+                File tDir=new File(tUserDirStr);
+                if(tDir.isDirectory()) return tDir;
+            }
+        }
+
+        String tPath=System.getProperty("user.home");
+        return tPath==null?null:new File(tPath);
     }
 
     public static File getMavenRepoDir(){
@@ -102,14 +109,14 @@ public class Sync{
             final Manifest manifest=new Manifest(is);
             is.close();
             serverZip.close();
-            final Attributes attributes = manifest.getMainAttributes();
-            if (attributes.getValue("KCauldronX-Version") != null) {
-                kcauldron = true;
-                version = attributes.getValue("KCauldronX-Version");
-                channel = attributes.getValue("KCauldronX-Channel");
-                group = attributes.getValue("KCauldronX-Group");
-                if (group == null) {
-                    group = "pw.prok";
+            final Attributes attributes=manifest.getMainAttributes();
+            if(attributes.getValue("KCauldronX-Version")!=null){
+                kcauldron=true;
+                version=attributes.getValue("KCauldronX-Version");
+                channel=attributes.getValue("KCauldronX-Channel");
+                group=attributes.getValue("KCauldronX-Group");
+                if(group==null){
+                    group="pw.prok";
                 }
             }else{
                 version=attributes.getValue("Implementation-Version");
