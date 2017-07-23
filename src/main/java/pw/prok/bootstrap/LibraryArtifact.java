@@ -79,7 +79,9 @@ public final class LibraryArtifact
         s = s.replace("<group>", this.mArtifact.getGroup().replace('.', '/'));
         s = s.replace("<artifact>", this.mArtifact.getName());
         s = s.replace("<version>", this.mArtifact.getVersion().toRawString());
-        s = s.replace("<classifier>", this.mArtifact.getClassifier());
+        if(this.mArtifact.getClassifier()!=null){
+            s = s.replace("<classifier>", this.mArtifact.getClassifier());
+        }
         s = s.replace("<extension>", this.mArtifact.getExtension());
         return s;
     }
