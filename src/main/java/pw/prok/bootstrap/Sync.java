@@ -24,11 +24,11 @@ public class Sync
             is.close();
             serverZip.close();
             final Attributes attributes = manifest.getMainAttributes();
-            if (attributes.getValue("KCauldron-Version") != null) {
+            if (attributes.getValue("KCauldronX-Version") != null) {
                 kcauldron = true;
-                version = attributes.getValue("KCauldron-Version");
-                channel = attributes.getValue("KCauldron-Channel");
-                group = attributes.getValue("KCauldron-Group");
+                version = attributes.getValue("KCauldronX-Version");
+                channel = attributes.getValue("KCauldronX-Channel");
+                group = attributes.getValue("KCauldroXn-Group");
                 if (group == null) {
                     group = "pw.prok";
                 }
