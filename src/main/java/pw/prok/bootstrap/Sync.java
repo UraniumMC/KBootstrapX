@@ -102,14 +102,14 @@ public class Sync{
             final Manifest manifest=new Manifest(is);
             is.close();
             serverZip.close();
-            final Attributes attributes=manifest.getMainAttributes();
-            if(attributes.getValue("KCauldronX-Version")!=null){
-                kcauldron=true;
-                version=attributes.getValue("KCauldronX-Version");
-                channel=attributes.getValue("KCauldronX-Channel");
-                group=attributes.getValue("KCauldroXn-Group");
-                if(group==null){
-                    group="pw.prok";
+            final Attributes attributes = manifest.getMainAttributes();
+            if (attributes.getValue("KCauldronX-Version") != null) {
+                kcauldron = true;
+                version = attributes.getValue("KCauldronX-Version");
+                channel = attributes.getValue("KCauldronX-Channel");
+                group = attributes.getValue("KCauldronX-Group");
+                if (group == null) {
+                    group = "pw.prok";
                 }
             }else{
                 version=attributes.getValue("Implementation-Version");
