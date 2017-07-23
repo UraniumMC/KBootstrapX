@@ -59,8 +59,11 @@ public class Sync{
                             if(tNode.getNodeType()!=Node.ELEMENT_NODE)
                                 continue;
 
-                            Sync.mMavenRepoDir=new File(tNode.getTextContent());
-                            break;
+                            File tFile=new File(tNode.getTextContent()+"".replace("${user.home}",System.getProperty("user.home")));
+                            if(tFile.isDirectory()){
+                                Sync.mMavenRepoDir=tFile;
+                                break;
+                            }
                         }
                     }catch(SAXException|IOException|ParserConfigurationException e){
                         System.out.println("Cannot reload maven setting file: "+e.getMessage());
