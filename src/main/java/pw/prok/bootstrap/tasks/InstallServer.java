@@ -19,15 +19,15 @@ public class InstallServer extends DefaultTask
     
     public static File make(final File serverDir, final File binDir, final File serverJar) throws Exception {
         System.out.println("Server directory: " + serverDir.getAbsolutePath());
-        final Sync.KCauldronInfo info = Sync.getInfo(serverJar);
-        final File targetServerJar = new LibraryArtifact(info.group, info.channel, info.version).getTarget(binDir);
-        if (!targetServerJar.getCanonicalPath().equals(serverJar.getCanonicalPath())) {
-            Utils.copyFile(serverJar, targetServerJar);
-        }
-        if (!Sync.sync(targetServerJar, binDir, true)) {
+        //final Sync.KCauldronInfo info = Sync.getInfo(serverJar);
+        //final File targetServerJar = new LibraryArtifact(info.group, info.channel, info.version).getTarget(binDir);
+        //if (!targetServerJar.getCanonicalPath().equals(serverJar.getCanonicalPath())) {
+        //    Utils.copyFile(serverJar, targetServerJar);
+        //}
+        if (!Sync.sync(serverJar, binDir, true)) {
             throw new IllegalStateException("Could not install libraries");
         }
-        DefaultTask.postInstall(serverDir, targetServerJar);
-        return targetServerJar;
+        DefaultTask.postInstall(serverDir, serverJar);
+        return serverJar;
     }
 }
