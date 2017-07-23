@@ -28,7 +28,7 @@ public class Sync
                 kcauldron = true;
                 version = attributes.getValue("KCauldronX-Version");
                 channel = attributes.getValue("KCauldronX-Channel");
-                group = attributes.getValue("KCauldroXn-Group");
+                group = attributes.getValue("KCauldronX-Group");
                 if (group == null) {
                     group = "pw.prok";
                 }
