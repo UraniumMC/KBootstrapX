@@ -113,13 +113,13 @@ public class Sync{
             is.close();
             serverZip.close();
             final Attributes attributes=manifest.getMainAttributes();
-            if(attributes.getValue("KCauldronX-Version")!=null){
+            if(attributes.getValue("Uranium-Version")!=null){
                 kcauldron=true;
-                version=attributes.getValue("KCauldronX-Version");
-                channel=attributes.getValue("KCauldronX-Channel");
-                group=attributes.getValue("KCauldronX-Group");
+                version=attributes.getValue("Uranium-Version");
+                channel=attributes.getValue("Uranium-Channel");
+                group=attributes.getValue("Uranium-Group");
                 if(group==null){
-                    group="pw.prok";
+                    group="cc.uraniummc";
                 }
             }else{
                 version=attributes.getValue("Implementation-Version");
