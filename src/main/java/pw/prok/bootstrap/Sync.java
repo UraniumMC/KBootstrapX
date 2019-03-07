@@ -50,7 +50,7 @@ public class Sync{
                     File tUserDir=Sync.getUserDir();
                     if(tUserDir==null) return null;
                     Sync.mMavenRepoDir=tUserDir;
-                    File tMVNSetting=new File(tUserDir,File.separator+".m2"+File.separator+"settings.xml");
+                    File tMVNSetting=new File(tUserDir,".m2"+File.separator+"settings.xml");
                     try{
                         Document tDoc=DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(tMVNSetting);
                         NodeList tList=tDoc.getElementsByTagName("localRepository");
@@ -245,6 +245,7 @@ public class Sync{
                             }
                         }
                     }
+
                 }
             }
             if(!tResolved){
