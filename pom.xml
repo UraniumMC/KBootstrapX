@@ -1,36 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>pw.prok</groupId>
+  <groupId>cc.uraniummc</groupId>
   <artifactId>KBootstrapX</artifactId>
   <version>0.2.1</version>
-      <repositories>
-        <repository>
-            <id>yumc-repo</id>
-            <url>http://repo.yumc.pw/content/groups/public/</url>
-        </repository>
-    </repositories>
-  <plugins>
-    <plugin>
-      <groupId>org.sonatype.plugins</groupId>
-      <artifactId>nexus-staging-maven-plugin</artifactId>
-      <version>1.5.1</version>
-      <executions>
-        <execution>
-          <id>default-deploy</id>
-          <phase>deploy</phase>
-          <goals>
-            <goal>deploy</goal>
-          </goals>
-        </execution>
-      </executions>
-      <configuration>
-        <serverId>uraniummc-nexus</serverId>
-        <nexusUrl>https://repo.uraniummc.cc</nexusUrl>
-        <skipStaging>true</skipStaging>
-      </configuration>
-    </plugin>
-  </plugins>
+  <repositories>
+    <repository>
+      <id>uraniummc-nexus</id>
+      <url>https://repo.uraniummc.cc/repository/maven-public/</url>
+    </repository>
+  </repositories>
   <dependencies>
     <dependency>
       <groupId>pw.prok</groupId>
@@ -51,26 +30,12 @@
       <scope>compile</scope>
     </dependency>
   </dependencies>
-  <licenses>
-    <license>
-      <name>MIT License</name>
-      <url>https://prok.pw/gitlab/Prototik/KBootstrap/raw/master/LICENCE</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
   <distributionManagement>
     <repository>
-      <id>yumc-xjboss</id>
-      <url >http://repo.yumc.pw/content/repositories/xjboss/</url >
-    </repository >
+      <id>uraniummc</id>
+      <url>https://repo.uraniummc.cc/repository/uraniummc/</url>
+    </repository>
   </distributionManagement>
-  <developers>
-    <developer>
-      <id>Prototik</id>
-      <name>Sergey Shatunov</name>
-      <email>me@prok.pw</email>
-    </developer>
-  </developers>
   <properties>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
