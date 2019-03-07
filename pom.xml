@@ -3,13 +3,34 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>pw.prok</groupId>
   <artifactId>KBootstrapX</artifactId>
-  <version>0.3.1</version>
+  <version>0.2.1</version>
       <repositories>
         <repository>
             <id>yumc-repo</id>
             <url>http://repo.yumc.pw/content/groups/public/</url>
         </repository>
     </repositories>
+  <plugins>
+    <plugin>
+      <groupId>org.sonatype.plugins</groupId>
+      <artifactId>nexus-staging-maven-plugin</artifactId>
+      <version>1.5.1</version>
+      <executions>
+        <execution>
+          <id>default-deploy</id>
+          <phase>deploy</phase>
+          <goals>
+            <goal>deploy</goal>
+          </goals>
+        </execution>
+      </executions>
+      <configuration>
+        <serverId>uraniummc-nexus</serverId>
+        <nexusUrl>https://repo.uraniummc.cc</nexusUrl>
+        <skipStaging>true</skipStaging>
+      </configuration>
+    </plugin>
+  </plugins>
   <dependencies>
     <dependency>
       <groupId>pw.prok</groupId>
