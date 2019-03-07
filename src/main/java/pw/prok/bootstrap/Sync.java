@@ -54,6 +54,9 @@ public class Sync{
                     try{
                         Document tDoc=DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(tMVNSetting);
                         NodeList tList=tDoc.getElementsByTagName("localRepository");
+                        if(tList.getLength()==0){
+                            return new File(tUserDir,".m2"+File.separator+"repository");
+                        }
                         for(int i=0;i<tList.getLength();i++){
                             Node tNode=tList.item(i);
                             if(tNode.getNodeType()!=Node.ELEMENT_NODE)

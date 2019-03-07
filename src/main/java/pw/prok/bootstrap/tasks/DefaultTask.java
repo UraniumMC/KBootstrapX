@@ -14,7 +14,8 @@ public abstract class DefaultTask
     
     public void setMain(final Main main) {
         this.mMain = main;
-        Damask.get().addRepository("yumc", "http://repo.yumc.pw/content/groups/public");
+        Damask.get().addRepository("uraniummc","https://repo.uraniummc.cc/repository/maven-public/");
+        //Damask.get().addRepository("yumc", "http://repo.yumc.pw/content/groups/public");
         Damask.get().addRepository("mavencentral", "http://repo1.maven.org/maven2");
     }
     
