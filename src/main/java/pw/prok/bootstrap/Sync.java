@@ -42,37 +42,46 @@ public class Sync{
     }
 
     public static File getMavenRepoDir(){
-        synchronized(Sync.class){
-            if(!Sync.mMavenRepoDirResloved){
-                Sync.mMavenRepoDirResloved=true;
-                String tDir=System.getenv("M2_REPO");
-                if(tDir==null){
-                    File tUserDir=Sync.getUserDir();
-                    if(tUserDir==null) return null;
-                    Sync.mMavenRepoDir=tUserDir;
-                    File tMVNSetting=new File(tUserDir,".m2"+File.separator+"settings.xml");
-                    try{
-                        Document tDoc=DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(tMVNSetting);
-                        NodeList tList=tDoc.getElementsByTagName("localRepository");
-                        if(tList.getLength()==0){
-                            return new File(tUserDir,".m2"+File.separator+"repository");
-                        }
-                        for(int i=0;i<tList.getLength();i++){
-                            Node tNode=tList.item(i);
-                            if(tNode.getNodeType()!=Node.ELEMENT_NODE)
-                                continue;
 
-                            File tFile=new File(tNode.getTextContent()+"".replace("${user.home}",System.getProperty("user.home")));
-                            if(tFile.isDirectory()){
-                                Sync.mMavenRepoDir=tFile;
-                                break;
+        synchronized(Sync.class){
+            tEnd:
+            {
+                File tUserDir = Sync.getUserDir();
+                if (!Sync.mMavenRepoDirResloved) {
+                    Sync.mMavenRepoDirResloved = true;
+                    String tDir = System.getenv("M2_REPO");
+                    if (tDir == null) {
+                        if (tUserDir == null) return null;
+                        Sync.mMavenRepoDir = tUserDir;
+                        File tMVNSetting = new File(tUserDir, ".m2" + File.separator + "settings.xml");
+                        try {
+                            Document tDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(tMVNSetting);
+                            NodeList tList = tDoc.getElementsByTagName("localRepository");
+                            if (tList == null || tList.getLength() == 0) {
+                                Sync.mMavenRepoDir = new File(tUserDir, ".m2" + File.separator + "repository");
+                                break tEnd;
                             }
+                            for (int i = 0; i < tList.getLength(); i++) {
+                                Node tNode = tList.item(i);
+                                if (tNode.getNodeType() != Node.ELEMENT_NODE)
+                                    continue;
+
+                                File tFile = new File(tNode.getTextContent() + "".replace("${user.home}", System.getProperty("user.home")));
+                                if (tFile.isDirectory()) {
+                                    Sync.mMavenRepoDir = tFile;
+                                    break;
+                                }
+                            }
+                        } catch (SAXException | IOException | ParserConfigurationException e) {
+                            System.out.println("Cannot reload maven setting file: " + e.getMessage());
                         }
-                    }catch(SAXException|IOException|ParserConfigurationException e){
-                        System.out.println("Cannot reload maven setting file: "+e.getMessage());
+                    } else {
+                        if(tDir!=null){
+                            Sync.mMavenRepoDir = new File(tDir);
+                        }else{
+                            Sync.mMavenRepoDir = new File(tUserDir, ".m2" + File.separator + "repository");
+                        }
                     }
-                }else{
-                    Sync.mMavenRepoDir=new File(tDir);
                 }
             }
         }

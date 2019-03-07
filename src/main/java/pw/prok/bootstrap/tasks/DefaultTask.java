@@ -8,15 +8,31 @@ import java.lang.reflect.*;
 import java.nio.file.*;
 import java.nio.file.attribute.*;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 public abstract class DefaultTask
 {
     protected Main mMain;
     
     public void setMain(final Main main) {
         this.mMain = main;
-        Damask.get().addRepository("uraniummc","https://repo.uraniummc.cc/repository/maven-public/");
-        //Damask.get().addRepository("yumc", "http://repo.yumc.pw/content/groups/public");
-        Damask.get().addRepository("mavencentral", "http://repo1.maven.org/maven2");
+        File repoList=new File(getServerDir(),"kBootstrapX.repos");
+        if(repoList.exists()){
+            try(BufferedReader is=Files.newBufferedReader(repoList.toPath(),UTF_8)){
+                do{
+                    String line1=is.readLine();
+                    String line2=is.readLine();
+                    if(line1==null||line2==null)break;
+                    System.out.println(String.format("Added repo Name:%s URL:%s",line1,line2));
+                    Damask.get().addRepository(line1,line2);
+                }while (true);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }else{
+            Damask.get().addRepository("uraniummc","https://repo.uraniummc.cc/repository/maven-public/");
+            Damask.get().addRepository("mavencentral", "http://repo1.maven.org/maven2");
+        }
     }
     
     public File getServerDir() {

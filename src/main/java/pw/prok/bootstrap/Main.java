@@ -17,6 +17,7 @@ public class Main
     public final Option installServer;
     public final Option runServer;
     public final Option libraries;
+    public final Option repositories;
     public final CommandLineParser parser;
     public final HelpFormatter helpFormatter;
     public CommandLine cli;
@@ -48,6 +49,8 @@ public class Main
         (this.runServer = new Option("c", "runServer", true, "Install & run custom server")).setArgName("server file or url");
         this.options.addOption(this.runServer);
         (this.libraries = new Option("l", "libraries", true, "Install specified libraries into server dir")).setArgName("libraries");
+        (this.repositories = new Option("repo","repositories",true,"Added custom repositories")).setArgName("repositories");
+        this.options.addOption(this.repositories);
         this.libraries.setValueSeparator(File.pathSeparatorChar);
         this.options.addOption(this.libraries);
         this.parser = (CommandLineParser)new DefaultParser();
